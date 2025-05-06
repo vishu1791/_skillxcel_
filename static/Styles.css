@@ -1,0 +1,226 @@
+/* Styling for each column */
+.col {
+  background-color: #1a1e2d;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  transition: transform 0.3s ease, font-size 0.3s ease; /* Smooth transition for transform and font size */
+}
+
+/* Hover effect for columns */
+.col:hover {
+  transform: scale(1.1); /* Slightly enlarge the column */
+  font-size: 1.1rem; /* Slightly increase the text size */
+}
+
+/* General column text styling */
+.col h5 {
+  font-size: 1.2rem; /* Set the default text size */
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.col p {
+  font-size: 1rem;
+  color: #ccc; /* Light grey color for the paragraph text */
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #0a0d19;
+  color: white;
+  text-align: center;
+}
+
+/* Styling for the scrolling text */
+/* General styles for the SkillXcel logo text */
+/* General styles for the SkillXcel logo text */
+.logo-text {
+  font-family: "Arial", sans-serif;
+  font-size: 48px; /* Adjust font size for the logo */
+  font-weight: bold;
+  color: #fff; /* White color for the logo text */
+  text-align: center;
+}
+
+/* Styling for the scrolling text */
+.scrolling-text {
+  font-family: "Arial", sans-serif; /* Match the font family of SkillXcel */
+  font-size: 48px; /* Same size as the SkillXcel logo */
+  font-weight: bold;
+  color: #4dffd085; /* Set the text color you want (e.g., red) */
+  white-space: nowrap; /* Prevent the text from wrapping */
+  overflow: hidden; /* Hide anything that overflows the container */
+  position: absolute; /* Allow positioning relative to the page */
+  top: 100px; /* Position it under the logo, adjust as needed */
+  width: 100%; /* Take full width of the screen */
+  text-align: center;
+  animation: marquee 10s linear infinite; /* Create the scrolling effect */
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%); /* Start from the right side of the screen */
+  }
+  100% {
+    transform: translateX(-100%); /* End at the left side of the screen */
+  }
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #070a13;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease-in-out;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  height: 40px;
+  margin-right: 10px;
+  border-radius: 60%;
+  object-fit: cover; /* Ensures the image fits within the circular shape */
+  border: 2px solid white; /* Optional: Add a white border for better visibility */
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+
+  color: #fff; /* White text */
+  letter-spacing: 5px;
+  z-index: 1;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.7),
+    /* Soft outer glow */ 0 0 20px rgba(255, 255, 255, 0.5),
+    /* Bright glow */ 0 0 30px rgba(255, 255, 255, 0.3); /* Intense bright glow */
+  font-family: "Arial", sans-serif; /* Clean font family */
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s, background 0.3s;
+  padding: 8px 12px;
+  border-radius: 5px;
+}
+
+.nav-links li a:hover {
+  color: white;
+  background: linear-gradient(to right, #ff4d4d, #a64dff);
+}
+
+.navbar.scrolled {
+  background-color: rgba(7, 10, 19, 0.9);
+}
+
+#bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.hero {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-title {
+  font-size: 4rem;
+  font-weight: bold;
+  background-image: linear-gradient(to right, #ff4d4d, #a64dff);
+  color: white;
+  padding: 10px;
+  display: inline-block;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: #cccccc;
+  margin-top: 10px;
+}
+
+.hero-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(to right, #ff4d4d, #a64dff);
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.hero-button:hover {
+  opacity: 0.8;
+}
+
+.main-content {
+  padding: 50px 20px;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.col {
+  background-color: #1a1e2d;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  width: 300px;
+}
+
+.footer {
+  background-color: #070a13;
+  padding: 20px;
+  text-align: center;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.social-icons a {
+  color: white;
+  font-size: 24px;
+  transition: color 0.3s ease-in-out;
+}
+
+.social-icons a:hover {
+  color: #ff4d4d;
+}

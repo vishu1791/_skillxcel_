@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SkillXcel Contact</title>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: url("{{ url_for('static', filename='contact.jpg') }}")
+          no-repeat center center fixed;
+        background-size: cover;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: #070a13;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        z-index: 1000;
+      }
+
+      .logo-text {
+        font-size: 2rem;
+        font-weight: bold;
+        color: white;
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.8),
+          0 0 30px rgba(255, 255, 255, 0.5);
+        padding-left: 20px;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
+
+      .nav-links li a {
+        text-decoration: none;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+      }
+
+      .nav-links li a:hover {
+        background: linear-gradient(to right, #ff4d4d, #a64dff);
+      }
+
+      .form-box {
+        background: rgba(26, 30, 45, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        width: 450px;
+        text-align: center;
+        box-sizing: border-box;
+      }
+      .input-field {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 5px;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+      }
+      .input-field::placeholder {
+        color: #ddd;
+      }
+      .btn {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(to right, #ff4d4d, #a64dff);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+    <script>
+      (function () {
+        emailjs.init("Yx9Rvoswig4sA8vrK"); // ✅ Replace with your Public Key
+      })();
+
+      function sendMail(event) {
+        event.preventDefault(); // Prevent page reload
+
+        var params = {
+          from_name: document.getElementById("name").value, // ✅ Match EmailJS template
+          from_email: document.getElementById("email").value,
+          phone_number: document.getElementById("phone").value,
+          message: document.getElementById("message").value,
+        };
+
+        emailjs.send("service_8ri79dh", "template_5xp5bzv", params).then(
+          function (response) {
+            alert("✅ Message sent successfully!");
+            document.getElementById("contactForm").reset();
+          },
+          function (error) {
+            alert("❌ Failed to send message. " + JSON.stringify(error));
+          }
+        );
+      }
+
+      function logout() {
+        document.cookie.split(";").forEach((cookie) => {
+          let [name] = cookie.split("=");
+          document.cookie =
+            name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+        });
+        window.location.href = "/"; // Redirect to login
+      }
+    </script>
+  </head>
+  <body>
+    <nav class="navbar" id="navbar">
+      <div class="logo-text">SkillXcel</div>
+      <!-- New Text Added Below the Logo -->
+
+      <ul class="nav-links">
+        <!-- <li><a href="#" id="user-welcome">Welcome, {{ username }}</a></li> -->
+
+        <li><a href="#" onclick="return false;">Home</a></li>
+        <li><a href="{{ url_for('about') }}">About</a></li>
+        <li><a href="{{ url_for('chatbot') }}">AI Mentor</a></li>
+        <li><a href="{{ url_for('contact') }}">Contact</a></li>
+        <li><a href="{{ url_for('courses') }}">Courses</a></li>
+        <li><a href="{{ url_for('roadmap') }}">Roadmap</a></li>
+
+        <li><a href="#" onclick="logout()">Logout</a></li>
+      </ul>
+    </nav>
+    <h1>Contact Us</h1>
+    <div class="form-box">
+      <h2>We'd love to hear from you!</h2>
+      <form id="contactForm" onsubmit="sendMail(event)">
+        <input
+          type="text"
+          id="name"
+          class="input-field"
+          placeholder="Full Name"
+          required
+        />
+        <input
+          type="email"
+          id="email"
+          class="input-field"
+          placeholder="Email"
+          required
+        />
+        <input
+          type="number"
+          id="phone"
+          class="input-field"
+          placeholder="Phone Number"
+          required
+        />
+        <textarea
+          id="message"
+          class="input-field"
+          placeholder="Your Message"
+          required
+        ></textarea>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+    </div>
+  </body>
+</html>

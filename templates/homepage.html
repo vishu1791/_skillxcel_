@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SkillXcel</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='Styles.css') }}"
+    />
+  </head>
+  <body>
+    <nav class="navbar" id="navbar">
+      <div class="logo-container">
+        <img
+          src="{{ url_for('static', filename='skill.jpg') }}"
+          alt="SkillXcel Logo"
+          class="logo-img"
+        />
+
+        <div class="logo-text">SkillXcel</div>
+        <!-- New Text Added Below the Logo -->
+      </div>
+      <ul class="nav-links">
+        <li><a href="#" id="user-welcome">Welcome, {{ username }}</a></li>
+
+        <li><a href="#" onclick="return false;">Home</a></li>
+        <li><a href="{{ url_for('about') }}">About</a></li>
+        <li><a href="{{ url_for('chatbot') }}">AI Mentor</a></li>
+        <li><a href="{{ url_for('contact') }}">Contact</a></li>
+        <li><a href="{{ url_for('courses') }}">Courses</a></li>
+        <li><a href="{{ url_for('roadmap') }}">Roadmap</a></li>
+        <!-- <li><a href="roadmap.html">Roadmap</a></li> -->
+
+        <li><a href="#" onclick="logout()">Logout</a></li>
+      </ul>
+    </nav>
+
+    <!-- Rest of the page remains the same -->
+    <div class="video-container">
+      <section class="hero">
+        <video autoplay muted loop id="bg-video">
+          <source
+            src="{{ url_for('static', filename='vb4.mp4') }}"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
+
+        <h1 class="hero-title">SkillXcel</h1>
+        <p class="hero-subtitle">Personalized Learning, Smarter Growth! 🚀</p>
+        <a href="{{ url_for('about') }}">
+          <button class="hero-button" onclick="exploreMore()">
+            Explore More
+          </button>
+        </a>
+      </section>
+
+      <div class="main-content">
+        <h1>Welcome to SkillXcel Learning Platform</h1>
+        <div class="row">
+          <div class="col">
+            <h5>Interactive Courses</h5>
+            <p>
+              Engage with our cutting-edge interactive courses designed to
+              enhance your learning experience.
+            </p>
+          </div>
+          <div class="col">
+            <h5>Personalized Roadmaps</h5>
+            <p>
+              Follow customized learning paths tailored to your goals and
+              current skill level.
+            </p>
+          </div>
+          <div class="col">
+            <h5>AI-Powered Mentoring</h5>
+            <p>
+              Get instant support and guidance from our advanced AI mentor
+              system.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <p>&copy; 2025 SkillXcel. All rights reserved.</p>
+      </footer>
+    </div>
+
+    <script>
+      function exploreMore() {
+        alert("Explore More clicked!");
+      }
+
+      window.addEventListener("scroll", function () {
+        const navbar = document.getElementById("navbar");
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      document.addEventListener("DOMContentLoaded", async function () {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          console.error("No token found in localStorage!");
+          window.location.href = "/"; // Redirect to login if no token
+          return;
+        }
+
+        console.log("Token being sent:", token); // ✅ Debug: Print token before request
+
+        try {
+          const response = await fetch("/home", {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`, // ✅ Send JWT token in Authorization header
+              "Content-Type": "application/json",
+            },
+          });
+
+          console.log("Response status:", response.status); // ✅ Debug response status
+
+          if (!response.ok) {
+            throw new Error(`Unauthorized: ${response.statusText}`);
+          }
+
+          const html = await response.text();
+          document.documentElement.innerHTML = html; // ✅ Load homepage content
+        } catch (error) {
+          console.error("Authentication error:", error);
+          localStorage.removeItem("token"); // Clear invalid token
+          window.location.href = "/"; // Redirect to login
+        }
+      });
+
+      function logout() {
+        document.cookie.split(";").forEach((cookie) => {
+          let [name] = cookie.split("=");
+          document.cookie =
+            name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+        });
+        window.location.href = "/"; // Redirect to login
+      }
+    </script>
+  </body>
+</html>

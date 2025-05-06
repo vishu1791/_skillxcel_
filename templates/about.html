@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About Us - SkillXcel</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Background Image for Entire Website */
+      body {
+        font-family: Arial, sans-serif;
+        background: url("../static/vb6.jpg") no-repeat center center fixed;
+        background-size: cover;
+        color: white;
+        text-align: center;
+        margin: 0;
+        padding-top: 70px;
+        /* Space for fixed header */
+      }
+
+      /* About Us Title */
+      .about-header {
+        color: #fff;
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: bold;
+        padding: 20px 0;
+        background: rgba(10, 13, 25, 0.9);
+        color: white;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+      }
+
+      .about-subtitle {
+        font-family: "Arial", sans-serif;
+        font-size: 48px; /* Keep large size */
+        font-weight: bold;
+        color: #fff; /* White color */
+        text-align: center;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.7),
+          0 0 20px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.3);
+        margin-top: 20px; /* Moves it slightly lower */
+      }
+
+      /* Hero Section */
+      .hero {
+        margin-top: 30px;
+        padding: 50px 20px;
+      }
+
+      .hero-subtitle {
+        font-size: 1.5rem;
+        color: #cccccc;
+        margin-top: 10px;
+      }
+
+      /* Features Section (Proper 2x2 Grid Layout - No Images) */
+      .features-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .feature-box {
+        background-color: rgba(26, 30, 45, 0.9);
+        border-radius: 10px;
+        padding: 20px;
+        flex: 1 1 calc(50% - 20px);
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        min-width: 300px;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .feature-box:hover {
+        transform: scale(1.05);
+      }
+
+      /* Lower Section - Content with Images */
+      .content-section {
+        background-color: rgba(26, 30, 45, 0.9);
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        text-align: left;
+        margin-bottom: 30px;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .content-section:hover {
+        transform: scale(1.05);
+      }
+
+      .content-section img {
+        width: 45%;
+        max-width: 400px;
+        height: auto;
+        border-radius: 10px;
+      }
+
+      .content-text {
+        width: 50%;
+      }
+
+      /* Footer */
+      .footer {
+        background-color: #070a13;
+        padding: 20px;
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      .social-icons a {
+        color: white;
+        font-size: 24px;
+        margin: 0 10px;
+        transition: color 0.3s;
+      }
+
+      .social-icons a:hover {
+        color: #ff4d4d;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .features-container {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .feature-box {
+          width: 90%;
+        }
+
+        .content-section {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .content-section img {
+          width: 80%;
+          margin-bottom: 10px;
+        }
+
+        .content-text {
+          width: 100%;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="about-header">
+      <h1>About Us</h1>
+    </header>
+    <p class="about-subtitle">SkillXcel</p>
+    <!-- Hero Section -->
+    <div class="container hero">
+      <p class="hero-subtitle">
+        Empowering learners with personalized education.
+      </p>
+    </div>
+
+    <!-- Features Section (Upper Section - 2x2 Grid Without Images) -->
+    <div class="container mt-3">
+      <div class="features-container">
+        <div class="feature-box">
+          <h5>Our Mission</h5>
+          <p>
+            To innovate learning with AI-powered tools and personalized
+            experiences.
+          </p>
+        </div>
+        <div class="feature-box">
+          <h5>Our Innovative Solution</h5>
+          <p>
+            We leverage AI to tailor learning paths, ensuring maximum
+            engagement.
+          </p>
+        </div>
+        <div class="feature-box">
+          <h5>Prototype</h5>
+          <p>Building a functional model to bring our vision to life.</p>
+        </div>
+        <div class="feature-box">
+          <h5>Technological Advancements</h5>
+          <p>
+            Using AI, ML, and cloud computing to enhance learning experiences.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- More About Us Section (Lower Content with Images) -->
+    <div class="container mt-5">
+      <h2>More About Us</h2>
+
+      <div class="content-section">
+        <img src="{{ url_for('static', filename='vb7.jpg') }}" alt="Our Team" />
+        <div class="content-text">
+          <h3>Our Team</h3>
+          <p>
+            Meet the passionate and dedicated individuals who drive SkillXcel's
+            success.
+          </p>
+        </div>
+      </div>
+
+      <div class="content-section">
+        <div class="content-text">
+          <h3>Our Vision</h3>
+          <p>
+            We envision a future where education is accessible and engaging.
+          </p>
+        </div>
+        <img
+          src="{{ url_for('static', filename='vision.jpg') }}"
+          alt="Our Vision"
+        />
+      </div>
+      <div class="content-section">
+        <img
+          src="{{ url_for('static', filename='ourmission.jpg') }}"
+          alt="Our Mission"
+        />
+
+        <div class="content-text">
+          <h3>Our Mission</h3>
+          <p>
+            Our mission is to create intelligent learning experiences that adapt
+            to every learner's pace and style. We harness AI to make education
+            more effective and inclusive.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="container contact">
+      <h2>Contact Us</h2>
+      <p>Email: vishwajeetbhate33@gmail.com</p>
+      <p>Phone: 91+123456789</p>
+    </div>
+
+    <!-- Footer with Social Icons -->
+    <div class="footer">
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </body>
+</html>

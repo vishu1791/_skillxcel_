@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Available Courses</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #0a0d19;
+        color: white;
+        text-align: center;
+      }
+
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: #070a13;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        z-index: 1000;
+      }
+
+      .logo-text {
+        font-size: 2rem;
+        font-weight: bold;
+        color: white;
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.8),
+          0 0 30px rgba(255, 255, 255, 0.5);
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
+
+      .nav-links li a {
+        text-decoration: none;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+      }
+
+      .nav-links li a:hover {
+        background: linear-gradient(to right, #ff4d4d, #a64dff);
+      }
+
+      .hero {
+        height: 50vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .hero-title {
+        font-size: 3.5rem;
+        font-weight: bold;
+        background-image: linear-gradient(to right, #ff4d4d, #a64dff);
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .course-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+        padding: 30px 20px;
+      }
+
+      .row {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-bottom: 20px;
+      }
+
+      .col {
+        background-color: #1a1e2d;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
+        width: 500px;
+        transition: transform 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      .col:hover {
+        transform: scale(1.05);
+      }
+
+      .col img {
+        width: 90px;
+        height: 90px;
+        margin-bottom: 10px;
+      }
+
+      .hidden {
+        display: none;
+        margin-top: 15px;
+      }
+
+      /* Updated Button Styles */
+      .sub-options {
+        margin-top: 15px;
+        display: none;
+        text-align: center;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .sub-options a {
+        display: inline-block;
+        width: 80%;
+        margin: 8px 0;
+        padding: 12px;
+        font-size: 1rem;
+        font-weight: bold;
+        background: linear-gradient(to right, #ff4d4d, #a64dff);
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease-in-out;
+      }
+
+      .sub-options a:hover {
+        background: linear-gradient(to right, #a64dff, #ff4d4d);
+        transform: scale(1.05);
+      }
+
+      .footer {
+        margin-top: 40px;
+        padding: 15px;
+        background-color: #070a13;
+      }
+    </style>
+    <script>
+      function toggleOptions(id) {
+        var options = document.getElementById(id);
+        options.style.display =
+          options.style.display === "none" || options.style.display === ""
+            ? "block"
+            : "none";
+      }
+      function logout() {
+        document.cookie.split(";").forEach((cookie) => {
+          let [name] = cookie.split("=");
+          document.cookie =
+            name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+        });
+        window.location.href = "/"; // Redirect to login
+      }
+    </script>
+  </head>
+  <body>
+    <nav class="navbar" id="navbar">
+      <div class="logo-text">SkillXcel</div>
+      <!-- New Text Added Below the Logo -->
+
+      <ul class="nav-links">
+        <!-- <li><a href="#" id="user-welcome">Welcome, {{ username }}</a></li> -->
+
+        <li><a href="#" onclick="return false;">Home</a></li>
+        <li><a href="{{ url_for('about') }}">About</a></li>
+        <li><a href="{{ url_for('chatbot') }}">AI Mentor</a></li>
+        <li><a href="{{ url_for('contact') }}">Contact</a></li>
+        <li><a href="{{ url_for('courses') }}">Courses</a></li>
+        <li><a href="{{ url_for('roadmap') }}">Roadmap</a></li>
+
+        <li><a href="#" onclick="logout()">Logout</a></li>
+      </ul>
+    </nav>
+
+    <section class="hero">
+      <h1 class="hero-title">Our Available Courses</h1>
+    </section>
+
+    <div class="course-container">
+      <div class="row">
+        <div class="col" onclick="toggleOptions('python-options')">
+          <img
+            src="{{ url_for('static', filename='python.jpg') }}"
+            alt="Computer Networks"
+          />
+          <h5>Python Programming</h5>
+          <p>
+            Learn Python from scratch and master advanced topics with hands-on
+            projects.
+          </p>
+          <div id="python-options" class="hidden sub-options">
+            <a
+              href="https://drive.google.com/drive/folders/1Qaz3B08YClrAW6uL71T69ccocYIiJsg1?usp=drive_link"
+              target="_blank"
+              >Playlist</a
+            >
+            <a
+              href="https://drive.google.com/drive/folders/1RAxhHVuTbxbuDDolkYg9UjNsPECe06DZ?usp=drive_link"
+              download="Python.pdf"
+              >Notes</a
+            >
+            <a href="{{ url_for('python') }}">Quiz</a>
+          </div>
+        </div>
+        <div class="col" onclick="toggleOptions('network-options')">
+          <img
+            src="{{ url_for('static', filename='computer.jpg') }}"
+            alt="Computer Networks"
+          />
+          <h5>Computer Networks</h5>
+          <p>
+            Understand network architectures, protocols, and security
+            principles.
+          </p>
+          <div id="network-options" class="hidden sub-options">
+            <a
+              href="https://drive.google.com/drive/folders/1wlExYXhE6Ivlf9Wzd526FI3evRjij7M5?usp=drive_link"
+              target="_blank"
+              >Playlist</a
+            >
+            <a
+              href="https://drive.google.com/drive/folders/1bqYXHaSzceW81mXMIGyFLiYDD3fb3Uev?usp=drive_link"
+              target="_blank"
+              >Notes</a
+            >
+
+            <a href="{{ url_for('network') }}">Quiz</a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col" onclick="toggleOptions('web-options')">
+          <img
+            src="{{ url_for('static', filename='web.jpg') }}"
+            alt="Computer Networks"
+          />
+          <h5>Web Development</h5>
+          <p>
+            Build modern websites and web apps using HTML, CSS, and JavaScript.
+          </p>
+          <div id="web-options" class="hidden sub-options">
+            <a
+              href="https://drive.google.com/drive/folders/1AtJHxP0mXRe6o9tPR5WdLITdi_gSNMJK?usp=drive_link"
+              target="_blank"
+              >Playlist</a
+            >
+            <a
+              href="https://drive.google.com/file/d/1scA4ruSEnXfLVk0Le9tiYw0hgxntXcPe/view?usp=drive_link"
+              target="_blank"
+              >Notes</a
+            >
+
+            <a href="{{ url_for('web') }}">Quiz</a>
+          </div>
+        </div>
+        <div class="col" onclick="toggleOptions('java-options')">
+          <img
+            src="{{ url_for('static', filename='java.jpg') }}"
+            alt="Computer Networks"
+          />
+          <h5>Java Programming</h5>
+          <p>Master Java programming and build scalable applications.</p>
+          <div id="java-options" class="hidden sub-options">
+            <a
+              href="https://drive.google.com/drive/folders/105iqIWGLdYDoIM35cZM92OwZVHC86hpk?usp=drive_link"
+              target="_blank"
+              >Playlist</a
+            >
+            <a
+              href="https://drive.google.com/drive/folders/1XlVD95x5sEjcJO535dmzGKO3xMAPsAHr?usp=drive_link"
+              target="_blank"
+              >Notes</a
+            >
+            <a href="{{ url_for('quiz') }}">Quiz</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>&copy; 2025 SkillXcell All sites reserved</p>
+    </footer>
+  </body>
+</html>

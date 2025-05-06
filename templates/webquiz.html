@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Development Quiz</title>
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #000000, #1a1a1a);
+        text-align: center;
+        color: white;
+        margin: 0;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        color: #ffcc00;
+        text-shadow: 3px 3px 10px rgba(255, 204, 0, 0.8);
+      }
+
+      .quiz-container {
+        max-width: 650px;
+        margin: 20px auto;
+        background: linear-gradient(135deg, #ffcc00, #000);
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(255, 204, 0, 0.3);
+        transition: transform 0.3s ease;
+      }
+
+      .quiz-container:hover {
+        transform: scale(1.02);
+      }
+
+      .question h3 {
+        font-size: 1.3rem;
+      }
+
+      .options {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .options li {
+        background: rgba(255, 255, 255, 0.2);
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 5px;
+        transition: background 0.3s;
+        cursor: pointer;
+      }
+
+      .options li:hover {
+        background: rgba(255, 255, 255, 0.5);
+      }
+
+      .submit-btn {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(to right, #ffcc00, #ff9900);
+        color: black;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        transition: all 0.3s;
+      }
+
+      .submit-btn:hover {
+        background: linear-gradient(to right, #ff9900, #ffcc00);
+        transform: scale(1.05);
+      }
+
+      .result {
+        margin-top: 20px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #ffcc00;
+        text-shadow: 2px 2px 8px rgba(255, 204, 0, 0.7);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Web Development Quiz</h1>
+
+    <div class="quiz-container">
+      <form id="quizForm">
+        <div id="quiz"></div>
+        <button type="submit" class="submit-btn">Submit Quiz</button>
+      </form>
+      <div class="result" id="result"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "Which language is used to structure web pages?",
+          a: "a",
+          options: ["HTML", "CSS", "JavaScript", "Python"],
+        },
+        {
+          q: "What does CSS stand for?",
+          a: "b",
+          options: [
+            "Computer Style Sheets",
+            "Cascading Style Sheets",
+            "Creative Styling System",
+            "Colorful Style System",
+          ],
+        },
+        {
+          q: "Which JavaScript function is used to display an alert box?",
+          a: "c",
+          options: ["msg()", "show()", "alert()", "display()"],
+        },
+        {
+          q: "What is the purpose of the <head> section in an HTML document?",
+          a: "a",
+          options: [
+            "Contains metadata and links to styles/scripts",
+            "Displays page content",
+            "Handles user interactions",
+            "Defines the page layout",
+          ],
+        },
+        {
+          q: "Which of the following is a frontend framework?",
+          a: "d",
+          options: ["Node.js", "Django", "Spring Boot", "React.js"],
+        },
+        {
+          q: "Which protocol is used for secure data transfer over the web?",
+          a: "b",
+          options: ["HTTP", "HTTPS", "FTP", "SMTP"],
+        },
+        {
+          q: "What is the primary function of JavaScript in web development?",
+          a: "c",
+          options: [
+            "Styling web pages",
+            "Structuring content",
+            "Adding interactivity",
+            "Handling database queries",
+          ],
+        },
+        {
+          q: "What does the 'div' element do in HTML?",
+          a: "a",
+          options: [
+            "Defines a section or division",
+            "Creates a list",
+            "Displays an image",
+            "Adds a hyperlink",
+          ],
+        },
+        {
+          q: "Which database is commonly used in web development?",
+          a: "b",
+          options: ["MS Word", "MySQL", "Photoshop", "PowerPoint"],
+        },
+        {
+          q: "What is the purpose of the 'viewport' meta tag in HTML?",
+          a: "d",
+          options: [
+            "Defines the color scheme",
+            "Enables JavaScript",
+            "Loads CSS files",
+            "Ensures proper scaling on mobile devices",
+          ],
+        },
+      ];
+
+      function loadQuiz() {
+        let quizContainer = document.getElementById("quiz");
+        let quizHTML = "";
+
+        questions.forEach((item, index) => {
+          quizHTML += `<div class="question"><h3>${index + 1}. ${
+            item.q
+          }</h3><ul class="options">`;
+          item.options.forEach((opt, i) => {
+            const letter = String.fromCharCode(97 + i);
+            quizHTML += `<li><label><input type="radio" name="q${
+              index + 1
+            }" value="${letter}"> ${opt}</label></li>`;
+          });
+          quizHTML += "</ul></div>";
+        });
+
+        quizContainer.innerHTML = quizHTML;
+      }
+
+      function calculateResult(event) {
+        event.preventDefault();
+        let score = 0;
+
+        questions.forEach((item, index) => {
+          const selected = document.querySelector(
+            `input[name='q${index + 1}']:checked`
+          );
+          if (selected && selected.value === item.a) score++;
+        });
+
+        document.getElementById(
+          "result"
+        ).innerHTML = `You scored ${score} out of ${questions.length}.`;
+      }
+
+      document
+        .getElementById("quizForm")
+        .addEventListener("submit", calculateResult);
+      window.onload = loadQuiz;
+    </script>
+  </body>
+</html>

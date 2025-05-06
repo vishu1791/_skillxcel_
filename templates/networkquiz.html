@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Computer Networks Quiz</title>
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #000000, #1a1a1a);
+        text-align: center;
+        color: white;
+        margin: 0;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        color: #ffcc00;
+        text-shadow: 3px 3px 10px rgba(255, 204, 0, 0.8);
+      }
+
+      .quiz-container {
+        max-width: 650px;
+        margin: 20px auto;
+        background: linear-gradient(135deg, #ffcc00, #000);
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(255, 204, 0, 0.3);
+        transition: transform 0.3s ease;
+      }
+
+      .quiz-container:hover {
+        transform: scale(1.02);
+      }
+
+      .question h3 {
+        font-size: 1.3rem;
+      }
+
+      .options {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .options li {
+        background: rgba(255, 255, 255, 0.2);
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 5px;
+        transition: background 0.3s;
+      }
+
+      .options li:hover {
+        background: rgba(255, 255, 255, 0.5);
+      }
+
+      .submit-btn {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(to right, #ffcc00, #ff9900);
+        color: black;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        transition: all 0.3s;
+      }
+
+      .submit-btn:hover {
+        background: linear-gradient(to right, #ff9900, #ffcc00);
+        transform: scale(1.05);
+      }
+
+      .result {
+        margin-top: 20px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #ffcc00;
+        text-shadow: 2px 2px 8px rgba(255, 204, 0, 0.7);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Computer Networks Quiz</h1>
+
+    <div class="quiz-container">
+      <form id="quizForm" onsubmit="return calculateResult()">
+        <div id="quizContent"></div>
+        <button type="submit" class="submit-btn">Submit Quiz</button>
+      </form>
+      <div class="result" id="result"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "Which device is used to connect multiple networks together?",
+          a: "c",
+          options: ["Switch", "Hub", "Router", "Bridge"],
+        },
+        {
+          q: "Which protocol is used to assign IP addresses automatically?",
+          a: "b",
+          options: ["DNS", "DHCP", "FTP", "SMTP"],
+        },
+        {
+          q: "What does TCP stand for?",
+          a: "a",
+          options: [
+            "Transmission Control Protocol",
+            "Transfer Communication Protocol",
+            "Technology Control Process",
+            "Transmission Configuration Process",
+          ],
+        },
+        {
+          q: "Which layer of the OSI model is responsible for end-to-end communication?",
+          a: "c",
+          options: ["Network", "Data Link", "Transport", "Application"],
+        },
+        {
+          q: "Which protocol is used for secure web communication?",
+          a: "d",
+          options: ["HTTP", "FTP", "Telnet", "HTTPS"],
+        },
+        {
+          q: "What is the default port number for HTTP?",
+          a: "a",
+          options: ["80", "443", "22", "25"],
+        },
+        {
+          q: "What is the full form of IP in networking?",
+          a: "b",
+          options: [
+            "Internet Pathway",
+            "Internet Protocol",
+            "Internal Processing",
+            "Integrated Processing",
+          ],
+        },
+        {
+          q: "Which network topology connects all devices in a single central cable?",
+          a: "c",
+          options: ["Star", "Ring", "Bus", "Mesh"],
+        },
+        {
+          q: "Which type of network covers a large geographical area?",
+          a: "a",
+          options: ["WAN", "LAN", "MAN", "PAN"],
+        },
+        {
+          q: "Which protocol is used to send emails?",
+          a: "d",
+          options: ["FTP", "POP3", "HTTP", "SMTP"],
+        },
+      ];
+
+      function generateQuiz() {
+        let quizHTML = "";
+        questions.forEach((item, index) => {
+          quizHTML += `
+                    <div class='question'>
+                        <h3>${index + 1}. ${item.q}</h3>
+                        <ul class='options'>
+                `;
+          item.options.forEach((opt, i) => {
+            const letter = String.fromCharCode(97 + i);
+            quizHTML += `
+                        <li>
+                            <input type='radio' name='q${
+                              index + 1
+                            }' value='${letter}'> ${opt}
+                        </li>
+                    `;
+          });
+          quizHTML += `</ul></div>`;
+        });
+
+        document.getElementById("quizContent").innerHTML = quizHTML;
+      }
+
+      function calculateResult() {
+        let score = 0;
+        questions.forEach((item, index) => {
+          const selected = document.querySelector(
+            `input[name='q${index + 1}']:checked`
+          );
+          if (selected && selected.value === item.a) {
+            score++;
+          }
+        });
+
+        document.getElementById(
+          "result"
+        ).innerHTML = `You scored ${score} out of ${questions.length}.`;
+        return false;
+      }
+
+      // Generate quiz when page loads
+      document.addEventListener("DOMContentLoaded", generateQuiz);
+    </script>
+  </body>
+</html>

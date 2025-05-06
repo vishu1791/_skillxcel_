@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Java Programming Quiz</title>
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #000000, #1a1a1a);
+        text-align: center;
+        color: white;
+        margin: 0;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        color: #ffcc00;
+        text-shadow: 3px 3px 10px rgba(255, 204, 0, 0.8);
+      }
+
+      .quiz-container {
+        max-width: 650px;
+        margin: 20px auto;
+        background: linear-gradient(135deg, #ffcc00, #000);
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(255, 204, 0, 0.3);
+        transition: transform 0.3s ease;
+      }
+
+      .quiz-container:hover {
+        transform: scale(1.02);
+      }
+
+      .question h3 {
+        font-size: 1.3rem;
+      }
+
+      .options {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .options li {
+        background: rgba(255, 255, 255, 0.2);
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 5px;
+        transition: background 0.3s;
+      }
+
+      .options li:hover {
+        background: rgba(255, 255, 255, 0.5);
+      }
+
+      .submit-btn {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(to right, #ffcc00, #ff9900);
+        color: black;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        transition: all 0.3s;
+      }
+
+      .submit-btn:hover {
+        background: linear-gradient(to right, #ff9900, #ffcc00);
+        transform: scale(1.05);
+      }
+
+      .result {
+        margin-top: 20px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #ffcc00;
+        text-shadow: 2px 2px 8px rgba(255, 204, 0, 0.7);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Java Programming Quiz</h1>
+
+    <div class="quiz-container">
+      <form id="quizForm" onsubmit="return calculateResult()">
+        <div id="quizContainer"></div>
+        <button type="submit" class="submit-btn">Submit Quiz</button>
+      </form>
+      <div class="result" id="result"></div>
+    </div>
+
+    <script>
+      const questions = [
+        {
+          q: "Which company developed Java?",
+          a: "a",
+          options: ["Sun Microsystems", "Microsoft", "Google", "Apple"],
+        },
+        {
+          q: "Which keyword is used to define a class in Java?",
+          a: "b",
+          options: ["define", "class", "struct", "interface"],
+        },
+        {
+          q: "Which data type is used to store a single character in Java?",
+          a: "c",
+          options: ["String", "int", "char", "boolean"],
+        },
+        {
+          q: "What is the entry point of a Java program?",
+          a: "a",
+          options: ["main method", "init method", "start method", "run method"],
+        },
+        {
+          q: "Which of the following is not a Java access modifier?",
+          a: "d",
+          options: ["public", "private", "protected", "global"],
+        },
+        {
+          q: "Which keyword is used to inherit a class in Java?",
+          a: "b",
+          options: ["implement", "extends", "inherits", "super"],
+        },
+        {
+          q: "What is the default value of a boolean variable in Java?",
+          a: "c",
+          options: ["1", "null", "false", "true"],
+        },
+        {
+          q: "Which loop executes at least once before checking the condition?",
+          a: "a",
+          options: ["do-while", "for", "while", "foreach"],
+        },
+        {
+          q: "Which collection class in Java allows duplicate values?",
+          a: "b",
+          options: ["Set", "List", "Map", "Queue"],
+        },
+        {
+          q: "What is used to handle exceptions in Java?",
+          a: "d",
+          options: ["catch", "error", "throw", "try-catch"],
+        },
+      ];
+
+      function generateQuiz() {
+        let formHTML = "";
+        questions.forEach((item, index) => {
+          formHTML += `<div class='question'><h3>${index + 1}. ${
+            item.q
+          }</h3><ul class='options'>`;
+          item.options.forEach((opt, i) => {
+            const letter = String.fromCharCode(97 + i);
+            formHTML += `<li><input type='radio' name='q${
+              index + 1
+            }' value='${letter}'> ${opt}</li>`;
+          });
+          formHTML += "</ul></div>";
+        });
+
+        document.getElementById("quizContainer").innerHTML = formHTML;
+      }
+
+      function calculateResult() {
+        let score = 0;
+        questions.forEach((item, index) => {
+          const selected = document.querySelector(
+            `input[name='q${index + 1}']:checked`
+          );
+          if (selected && selected.value === item.a) {
+            score++;
+          }
+        });
+
+        document.getElementById(
+          "result"
+        ).innerHTML = `You scored ${score} out of ${questions.length}.`;
+        return false; // Prevent form submission
+      }
+
+      // Call function to generate quiz when the page loads
+      generateQuiz();
+    </script>
+  </body>
+</html>
