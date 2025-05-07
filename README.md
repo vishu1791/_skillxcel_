@@ -11,7 +11,4 @@ Welcome to **SkillXcel** – your all-in-one personalized platform for mastering
 - 🎯 **Goal Setting & Reminders** – Stay consistent with customized goals and notification reminders.
 - 🧰 **Resources & Tools** – Access a curated list of resources including articles, videos, and coding challenges.
 
-## 🔍 Demo
-
-Coming soon! (or link to your live project if available)
 
